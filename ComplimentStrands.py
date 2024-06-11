@@ -2,6 +2,7 @@ __authors__ = "Morgan Bakelmun"
 __maintainer__ = "Morgan Bakelmun"
 __email__ = "morganbakelmun@hotmail.com"
 
+# Function for verifying that only valid base codes are in the input string.
 def validate_sequence(sequence):
     valid_characters = {'A', 'B', 'C', 'D', 'G', 'H', 'I', 'K', 'M', 'N', 'R', 'S', 'T', 'V', 'W', 'Y'}
     for char in sequence:
@@ -32,10 +33,9 @@ def get_complement(sequence):
     
     # Generate the complement sequence
     complement_sequence = ''.join(complements[base] for base in sequence)
-    
     return complement_sequence
 
-# Flips the DNA string
+# Reverse the DNA string
 def get_reverse(sequence):
     return sequence[::-1]
 
@@ -46,6 +46,7 @@ print("2. Reverse")
 print("3. Forward Complement")
 print("4. Reverse Complement")
 
+# First menu. User must select what strand they are providing.
 while True:
     # User input
     selection = input("Enter the number corresponding to the sequence type: ")
@@ -63,7 +64,7 @@ while True:
             input_type = 'reverse-comp'
         break
 
-# Second menu
+# Second menu. Now user must type/paste their DNA sequence.
 while True:
     # User input
     input_sequence = input("Please type your DNA sequence: ")
