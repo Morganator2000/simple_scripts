@@ -32,3 +32,4 @@ for column in sample_columns:
 # Create abd export the results data frame
 results_df = pd.DataFrame(results)
 results_df.to_csv('results.csv', index=False)
+print("Run Complete!")
