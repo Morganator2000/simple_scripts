@@ -1,8 +1,10 @@
-install.packages("ggplot2")
-install.packages("tidyverse")
-install.packages("ggtree")
-library(tidyverse)
-library(ggplot2)
-library(ggtree)
-tree <- read.tree("tree.nwk")
-ggtree(tree)
+if(!requireNamespace("BiocManager")){
+  install.packages("BiocManager")
+}
+BiocManager::install("phyloseq")
+BiocManager::install("microbiome")
+# https://github.com/joey711/phyloseq
+library(phyloseq)
+?phyloseq
+?otu_table
+
