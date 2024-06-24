@@ -18,6 +18,7 @@ if [[ "$file" != *.sh && "$file" != *.txt ]]; then
 	echo "Invalid file extension. You can only add this to .sh and .txt files"
 	exit 1
 fi
+#TODO: verify that the SBATCH lines aren't already there. If they are, remove them.
 
 #step 2, save everything that is already written in the script.
 info=$(cat $1)
