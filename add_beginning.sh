@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 PATH=/bin:/usr/bin ; export PATH
 umask 022
 
@@ -8,12 +8,22 @@ umask 022
 #especially if you always use the same defaults. So instead, this script will
 #add it in for you.
 
+#Error handling to make sure there is only one argument
+if [ "$#" -ne 1 ]; then
+  echo "Error: This script requires exactly one argument."
+  echo "Usage: $0 <argument>"
+  exit 1
+fi
+
 #the first and only argument, the file name.
 file=$1
 
-#TODO: Error handling when there is no argument or more than one.
-
 #step 1, make sure that the argument is a valid extension.
+if [ ! -f "$script_file" ]; then
+  echo "Error: File '$script_file' not found."
+  exit 1
+fi
+
 if [[ "$file" != *.sh && "$file" != *.txt ]]; then
 	echo "Invalid file extension. You can only add this to .sh and .txt files"
 	exit 1
