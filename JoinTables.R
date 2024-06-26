@@ -1,4 +1,4 @@
-if(!requireNamespace("dplyr")){
+if (!requireNamespace("dplyr")) {
   install.packages("dplyr")
 }
 library(dplyr)
