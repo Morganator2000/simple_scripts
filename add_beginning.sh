@@ -1,13 +1,8 @@
-#!/bin/bash
-PATH=/bin:/usr/bin ; export PATH
-umask 022
-
+#/bin/bash
 #Morgan Bakelmun
-
 #Copying and pasting the SBATCH commands at the start of your script can be annoying,
 #especially if you always use the same defaults. So instead, this script will
 #add it in for you.
-
 #Error handling to make sure there is only one argument
 if [ "$#" -ne 1 ]; then
   echo "Error: This script requires exactly one argument."
@@ -43,25 +38,21 @@ while IFS= read -r line; do
     skip_done=true
   fi
   echo "$line" >> "$temp_file"
-done < "$script_file"
-
-info=$(cat $1)
+done
 
 #step 3, add SBATCH lines, then re-add the script.
-{
-	echo "#!/bin/bash -l"
-	echo "#SBATCH --job-name=$(basename 'script_file')"
-	#TODO: output is job-name + .out
-	echo "#SBATCH --output=$(basename 'script_file').out"
-	echo "#SBATCH --partition=standard"
-	echo "#SBATCH --account=grdi_genarcc"
-	echo "#SBATCH --time=12:00:00"
-	echo "#SBATCH --ntasks=1"
-	echo "#SBATCH --cpus-per-task=1"
-	echo "#SBATCH --comment=\"Submitted job\"" # Probably should change the comment.
-	echo
-	cat "$temp_file"
-} > "$script_file"
+echo "#!/bin/bash -l" >> $script_file
+echo "#SBATCH --job-name=$(basename 'script_file')" >> $script_file
+echo "#SBATCH --output=$(basename 'script_file').out" >> $script_file
+echo "#SBATCH --partition=standard" >> $script_file
+echo "#SBATCH --account=grdi_genarcc" >> $script_file
+echo "#SBATCH --time=12:00:00" >> $script_file
+echo "#SBATCH --ntasks=1" >> $script_file
+echo "#SBATCH --cpus-per-task=1" >> $script_file
+echo "#SBATCH --comment=\"Submitted job\"" >> $script_file # Probably should change the comment.
+echo >> $script_file
 
+cat $temp_file >> $script_file
 rm $temp_file
 
+echo "Default SBATCH lines added."
