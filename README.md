@@ -4,6 +4,8 @@ These are all individual scripts to perform simple repetitive tasks that I'm too
 
 **add_beginning.sh**: This script adds some default SBATCH commands to the start of a different .sh script.
 
+**blank_SBATCH.sh**: The current way I get default SBATCH commands.
+
 **ComplementStrands.py**: A terminal interface program that will accept a DNA strand and figure out the complementary and reverse strands for you. It even handles ambiguous nucleotide codes.
 
 **JoinTables.R**: Joins a feature table and classification table together to produce a new feature table, with taxonomy.
