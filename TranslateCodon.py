@@ -1,20 +1,69 @@
 #This script takes in your DNA string and translates the codons into amino
 #acid codes.
 
+#Validate that the sequence will work for the future functions.
 def validate_sequence (sequence):
-    #TODO: length is divisible by 3
-    #TODO: only A U G C is present
-    return None
+    if len(sequence) % 3 != 0:
+        print("Incorrect number of characters. Sequence should be in a multiple of three. You have " + str(len(sequence) % 3) + " extra characters.")
+        return False
+    sequence.upper()
+    valid_characters = {'A', 'C', 'G', 'U'}
+    for char in sequence:
+        if char not in valid_characters:
+            print(f"Invalid character '{char}'.")
+            return False
+    return True
 
+#Split the string 
 def split_sequence (sequence):
-    #TODO: separate the sequence into groups of 3.
-    #TODO: return an array of codons.
-    return None
+    return [sequence[i:i+3] for i in range(0, len(sequence), 3)]
 
 def translate_codon (codon):
-    #TODO: Match the three letters to the appropriate amino acid
-    #TODO: return amino single character
-    return None
+    match codon:
+        case 'GCA' | 'GCC' | 'GCG' | 'GCU':
+            return "A"
+        case 'CGA' | 'CGC' | 'CGG' | 'CGU' | 'AGA' | 'AGG':
+            return "R"
+        case 'AAU' | 'AAC':
+            return "N"
+        case 'GAU' | 'GAC':
+            return "D"
+        case 'UGU' | 'UGC':
+            return "C"
+        case 'CAA' | 'CAG':
+            return "Q"
+        case 'GAA' |'GAG':
+            return "E"
+        case 'GGA' | 'GGC' | 'GGU' | 'GGG':
+            return "G"
+        case 'CAU' | 'CAC':
+            return "H"
+        case 'AUA' | 'AUC' | 'AUU':
+            return "I"
+        case 'UUA' | 'UUG' | 'CUA' | 'CUC' | 'CUG' | 'CUU':
+            return "L"
+        case 'AAA' | 'AAG':
+            return "K"
+        case 'AUG':
+            return "M"
+        case 'UUU' | 'UUC':
+            return "F"
+        case 'CCA' | 'CCC' | 'CCG' | 'CCU':
+            return "P"
+        case 'AGU' | 'AGC' | 'UCA' | 'UCC' | 'UCG' | 'UCU':
+            return "S"
+        case 'ACA' | 'ACC' | 'ACG' | 'ACU':
+            return "T"
+        case 'UGG':
+            return "W"
+        case 'UAU' | 'UAC':
+            return "Y"
+        case 'GUA' | 'GUC' | 'GUG' | 'GUU':
+            return "V"
+        case 'UAA' | 'UAG' | 'UGA':
+            return " STOP "
+        case _:
+            return "Invalid value. How did you do that?"
 
 def sequence_to_codon (sequence):
     sequence.upper()
@@ -24,14 +73,5 @@ def sequence_to_codon (sequence):
     for codon in codons:
         amino_acid = translate_codon(codon)
         amino_acids.append(amino_acid)
-    return amino_acids
-
-#Test main
-test_sequence = "AUGAAGACGGUA"
-translated_acid = sequence_to_codon(test_sequence)
-print(test_sequence)
-print(translated_acid)
-if translated_acid == "MKTV":
-    print("Success")
-else:
-    print("Failed")
+    acid_string = ''.join(amino_acids)
+    return acid_string
