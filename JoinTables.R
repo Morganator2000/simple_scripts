@@ -8,7 +8,7 @@ table1 <- read.csv("feature-table.csv", check.names = FALSE)
 id1 <- "#OTU ID"
 table2 <- read.csv("taxonomy.csv", check.names = FALSE)
 id2 <- "Feature ID"
-output.name <- "feature-table-taxonomy.csv"
+output.name <- "feature_table_taxonomy.csv"
 
 table1 <- table1 %>% rename(ASV = !!id1)
 table2 <- table2 %>% rename(ASV = !!id2)
