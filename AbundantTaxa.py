@@ -22,14 +22,14 @@ for column in sample_columns:
     max_index = data_frame[column].idxmax()
     max_row = data_frame.loc[max_index]
     
-    # Append the sample name, ID, and Animal to the results list
+    # Append the sample name, taxa, and ASV to the results list
     results.append({
         'Sample': column,
         taxa_column: max_row[taxa_column],
         asv_column: max_row[asv_column]
     })
 
-# Create abd export the results data frame
+# Create and export the results data frame
 results_df = pd.DataFrame(results)
 results_df.to_csv('results.csv', index=False)
 print("Run Complete!")
